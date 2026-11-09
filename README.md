@@ -3,12 +3,12 @@
 ## 1. Datos generales
 
 - **Nombre completo:** Job José Benavides Pérez
-- **Carné:** [PENDIENTE: número de carné ESIT]
-- **Correo institucional:** [PENDIENTE: correo institucional ESIT]
+- **Carné:** N/A
+- **Correo institucional:** N/A
 - **Asignatura:** LENGUAJES DE PROGRAMACIÓN CON ASPECTOS DE SEGURIDAD
 - **Fecha:** 08/11/2026
 
-> Los campos de carné y correo institucional requieren datos reales del estudiante. No se han inventado.
+> Carné y correo institucional: N/A (no asignados por ESIT).
 
 ## 2. Descripción
 
