@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Práctica de código seguro, autenticación y métricas MTTD y MTTR">
+    <title>Inicio | Laboratorio de ciberseguridad</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a class="brand" href="/">LABORATORIO DE CIBERSEGURIDAD</a>
+            <nav class="nav" aria-label="Navegación principal">
+                <a href="/">Inicio</a>
+                <a href="/registro">Registro</a>
+                <a href="/login">Acceso</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="intro">
+            <span class="eyebrow">Código seguro · Modelo OWASP</span>
+            <h1>Registro, autenticación y detección de incidentes</h1>
+            <p>Aplicación de práctica desarrollada con Python, Flask y SQLite. Permite registrar usuarios y comprobar accesos. Los intentos fallidos se guardan para su análisis y para calcular los tiempos MTTD y MTTR.</p>
+            <div class="actions">
+                <a class="button" href="/registro">Registrar usuario</a>
+                <a class="button ghost" href="/login">Iniciar sesión</a>
+            </div>
+            <p class="note">El detector de incidentes se ejecuta por separado desde la terminal con <code>python detector.py</code>.</p>
+        </section>
+    </main>
+    <footer>Lenguajes de Programación con Aspectos de Seguridad · Práctica académica</footer>
+</body>
+</html>

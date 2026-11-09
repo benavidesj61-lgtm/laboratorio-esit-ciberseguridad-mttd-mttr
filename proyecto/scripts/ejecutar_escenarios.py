@@ -126,13 +126,13 @@ def ejecutar(destino):
             verificar(all(v > 0 for v in mttd + mttr), "Tiempo de medicion no positivo")
 
             reporte = [
-                "# Evidencias remotas — laboratorio de seguridad ESIT",
+                "# Resultados de las pruebas de seguridad",
                 "",
                 f"Fecha de la ejecucion automatizada: {inicio_ejecucion}",
                 "",
-                "**Origen:** GitHub Actions en Linux con Python 3.13, a traves del cliente de pruebas Flask.",
-                "**Datos:** usuarios ficticios y marcas de tiempo reales medidas en esta ejecucion;",
-                "no son capturas de una sesion local del estudiante.",
+                "**Entorno de prueba:** GitHub Actions (Linux, Python 3.13 y Flask).",
+                "**Datos:** usuarios de ejemplo y mediciones tomadas durante la prueba;",
+                "no se trata de una ejecucion en el equipo del estudiante.",
                 "**Bloqueo:** SIMULADO; el usuario no se deshabilita realmente.",
                 "",
                 "| Prueba | Usuario | MTTD (s) | MTTR (s) |",
@@ -151,8 +151,8 @@ def ejecutar(destino):
                 "",
                 "**Archivos:** eventos.log, respuesta.log, resultados.csv y salida_terminal.txt.",
                 "",
-                "**Pendiente fuera de CI:** incorporar el README oficial del Aula Virtual",
-                "y entregar el enlace del repositorio a traves de dicha plataforma.",
+                "**El README oficial ya se integro al repositorio. Falta entregar el enlace",
+                "del repositorio por medio del Aula Virtual.**",
             ])
             (destino / "reporte.md").write_text("\n".join(reporte) + "\n", encoding="utf-8")
             (destino / "salida_terminal.txt").write_text("\n".join(mensajes) + "\n", encoding="utf-8")

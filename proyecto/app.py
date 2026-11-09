@@ -27,7 +27,7 @@ def registrar_evento(tipo, usuario):
 
 @app.route("/")
 def inicio():
-    return 'Laboratorio de Ciberseguridad | <a href="/registro">Registro</a> | <a href="/login">Login</a>'
+    return render_template("inicio.html")
 
 @app.route("/registro", methods=["GET", "POST"])
 def registro():
