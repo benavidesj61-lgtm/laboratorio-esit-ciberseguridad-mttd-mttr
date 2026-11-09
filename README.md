@@ -1,81 +1,91 @@
-# Laboratorio ESIT: Seguridad web, MTTD y MTTR
+# Laboratorio: Código Seguro y Modelo OWASP
 
-Práctica de **Unidad 3 — Código Seguro y Modelo OWASP** con Python, Flask y SQLite.
+## 1. Datos generales
 
-**Importante:** Descarga del Aula Virtual el README oficial y complétalo con tus datos académicos. Esta documentación técnica no sustituye el archivo o datos requeridos por la tutora.
+- **Nombre completo:** Job José Benavides Pérez
+- **Carné:** [PENDIENTE: número de carné ESIT]
+- **Correo institucional:** [PENDIENTE: correo institucional ESIT]
+- **Asignatura:** LENGUAJES DE PROGRAMACIÓN CON ASPECTOS DE SEGURIDAD
+- **Fecha:** 08/11/2026
 
-## Funcionalidades
+> Los campos de carné y correo institucional requieren datos reales del estudiante. No se han inventado.
 
-- Formulario de registro e inicio de sesión con SQLite.
-- Validación del nombre de usuario (4-20 caracteres, letras, números y guion bajo), formato de correo y longitud mínima de contraseña (8).
-- Comprobación de duplicados, sentencias SQL parametrizadas y hash de contraseñas con Werkzeug.
-- Registro de eventos `LOGIN_CORRECTO` y `LOGIN_FALLIDO` sin almacenar contraseñas.
-- Alerta al detectar tres intentos fallidos consecutivos de un mismo usuario.
-- MTTD: detección menos primer intento fallido; MTTR: respuesta simulada menos detección.
-- Tabla y promedios para tres escenarios; resultados persistidos en `resultados.csv` (excluido de Git).
+## 2. Descripción
 
-## Windows 11 + VS Code
+Este laboratorio consiste en desarrollar una aplicación web utilizando Python, implementando controles básicos de seguridad basados en buenas prácticas y el modelo OWASP. Se aplican mecanismos de validación de entradas, consultas parametrizadas, protección de contraseñas, registro de eventos de autenticación y detección de incidentes, incluyendo el cálculo de las métricas MTTD y MTTR.
 
-Abre una terminal PowerShell **en esta carpeta del proyecto**, y ejecuta:
+## 3. Estructura del proyecto
 
-```powershell
+~~~text
+laboratorio-esit-ciberseguridad-mttd-mttr/
+├── proyecto/
+│   ├── app.py
+│   ├── crearDB.py
+│   ├── detector.py
+│   ├── requirements.txt
+│   ├── templates/
+│   │   ├── registro.html
+│   │   └── login.html
+│   ├── scripts/
+│   │   └── ejecutar_escenarios.py
+│   └── tests/
+│       └── test_laboratorio.py
+├── README.md
+├── EVIDENCIA_REMOTA.md
+├── .gitignore
+└── .github/workflows/tests.yml
+~~~
+
+La base de datos SQLite y los archivos de registro se generan al ejecutar el proyecto; no se publican datos sensibles.
+
+## 4. Ejecución del proyecto
+
+**Paso 1.** Clonar el repositorio.
+
+~~~bash
+git clone https://github.com/benavidesj61-lgtm/laboratorio-esit-ciberseguridad-mttd-mttr.git
+~~~
+
+**Paso 2.** Ingresar al proyecto.
+
+~~~bash
+cd laboratorio-esit-ciberseguridad-mttd-mttr/proyecto
+~~~
+
+**Paso 3.** Instalar las dependencias. Se recomienda un entorno virtual:
+
+~~~bash
 python -m venv venv
+~~~
+
+En Windows PowerShell, sin activar el entorno:
+
+~~~powershell
 .\venv\Scripts\python.exe -m pip install -r requirements.txt
+~~~
+
+**Paso 4.** Crear la base de datos y ejecutar la aplicación:
+
+~~~powershell
 .\venv\Scripts\python.exe crearDB.py
 .\venv\Scripts\python.exe app.py
-```
+~~~
 
-Abre `http://127.0.0.1:5000/registro` para registrar un usuario ficticio y `http://127.0.0.1:5000/login` para iniciar sesión. En otra terminal:
+Abrir **http://127.0.0.1:5000/registro** para registrar dos usuarios ficticios y **http://127.0.0.1:5000/login** para iniciar sesión y realizar tres intentos fallidos.
 
-```powershell
+**Paso 5.** En otra terminal, ejecutar el detector:
+
+~~~powershell
 .\venv\Scripts\python.exe detector.py
-```
+~~~
 
-## Pruebas del laboratorio
+Tras la alerta, presionar Enter para registrar la respuesta de bloqueo **simulado**. Repetir con tres escenarios diferentes para obtener los promedios de MTTD y MTTR.
 
-1. Registra dos usuarios de ejemplo con correos ficticios y contraseñas de 8+ caracteres.
-2. Prueba usuario inválido, correo inválido, contraseña corta, usuario duplicado y login incorrecto.
-3. Con `usuario_01`, inicia sesión correctamente, luego introduce **tres veces seguidas** una contraseña incorrecta.
-4. Ejecuta `detector.py`. Se generará una alerta con MTTD, se pedirá presionar Enter para registrar el bloqueo **simulado**, y se mostrará MTTR.
-5. Repite el paso anterior con dos grupos adicionales de tres intentos fallidos y ejecución de `detector.py` para registrar **tres escenarios** y observar promedios.
-6. Revisa `eventos.log`, `respuesta.log`, `resultados.csv` (archivos generados localmente, no publicados).
+## 5. Evidencias de pruebas y cálculos
 
-| Prueba | MTTD (s) | MTTR (s) |
-|---|---:|---:|
-| 1 | Por medir | Por medir |
-| 2 | Por medir | Por medir |
-| 3 | Por medir | Por medir |
-| Promedio | Por calcular | Por calcular |
+- Se verifican automáticamente la validación de datos, los registros, el hash de contraseñas, los eventos y las métricas mediante GitHub Actions.
+- En [EVIDENCIA_REMOTA.md](EVIDENCIA_REMOTA.md) se documentan tres escenarios ejecutados en GitHub Actions, con una tabla de MTTD y MTTR basada en sus tiempos reales y el enlace a los registros.
+- Para ejecutar las pruebas unitarias desde la carpeta del proyecto: \`python -m unittest discover -s tests -v\`.
+- El bloqueo de usuarios se **simula y registra**, no se deshabilita realmente ninguna cuenta.
 
-**No inventar resultados:** las cifras salen de las ejecuciones reales.
-
-## Pruebas automatizadas
-
-```powershell
-.\venv\Scripts\python.exe -m unittest discover -s tests -v
-```
-
-## Seguridad y límites
-
-La acción `USUARIO_BLOQUEADO_SIMULADO` registrada en `respuesta.log` **no bloquea realmente** la cuenta; así lo pide la práctica. El detector se ejecuta manualmente: no es un SIEM de tiempo real. Flask corre en desarrollo local con `debug=True` y **no debe exponerse a Internet**. El archivo `.gitignore` impide publicar bases de datos locales, logs y entornos virtuales.
-
-Para entregar, pega únicamente el **enlace del repositorio público** en el Aula Virtual; no envíes ZIP.
-
-
-## Evidencia remota de los tres escenarios
-
-En cada push, GitHub Actions ejecuta el cliente de pruebas de Flask:
-crea dos usuarios **ficticios**, comprueba validaciones/hash/duplicados,
-genera tres escenarios con tres fallos cada uno, registra tres alertas y calcula
-MTTD/MTTR reales para esa **ejecución automatizada**.
-
-1. Abre [GitHub Actions](https://github.com/benavidesj61-lgtm/laboratorio-esit-ciberseguridad-mttd-mttr/actions).
-2. Abre la ejecución más reciente de **Python laboratory tests**.
-3. En **Artifacts**, descarga el artefacto \`evidencia-esit-mttd-mttr\`.
-4. Consulta \`reporte.md\` (tabla y promedios), \`eventos.log\`,
-   \`respuesta.log\`, \`resultados.csv\` y \`salida_terminal.txt\`.
-
-Esto es evidencia remota reproducible en Linux/CI, no afirma haber hecho
-pruebas físicas en la laptop ni haber enviado la entrega al Aula Virtual.
-La guía (pág. 2) exige el **README oficial del Aula Virtual** con
-datos académicos, que debe incorporarse antes de entregar.
+Los resultados de GitHub Actions corresponden a una ejecución automatizada en Linux y no representan pruebas realizadas en el equipo personal del estudiante.
