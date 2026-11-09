@@ -105,4 +105,3 @@ La práctica permitió reunir en una misma aplicación varias medidas básicas d
 
 La parte de detección permitió observar cómo cambia el tiempo transcurrido entre el primer intento sospechoso, la alerta y la respuesta. Con ello fue posible calcular MTTD y MTTR y comprobar la importancia de contar con registros claros al analizar un incidente.
 
-> Aplicación preparada para uso académico local; no está diseñada para exponerse públicamente como servicio de autenticación.
