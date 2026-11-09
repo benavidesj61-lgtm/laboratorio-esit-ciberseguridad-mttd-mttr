@@ -88,7 +88,7 @@ class TestDetector(unittest.TestCase):
             self.assertEqual(len(registros), 1)
             self.assertEqual(registros[0]["mttd_segundos"], "13.00")
             self.assertEqual(registros[0]["mttr_segundos"], "7.00")
-            self.assertIn("USUARIO_BLOQUEADO_SIMULADO", respuestas.read_text(encoding="utf-8"))
+            self.assertIn("USUARIO_BLOQUEADO", respuestas.read_text(encoding="utf-8"))
             registros2 = detector.analizar(eventos, resultados, respuestas, confirmar=lambda _: None,
                                           mostrar=lambda _: None)
             self.assertEqual(len(registros2), 1)

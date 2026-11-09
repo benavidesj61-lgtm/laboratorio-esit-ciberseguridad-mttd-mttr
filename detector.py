@@ -69,7 +69,7 @@ def guardar_resultado(fila, ruta=RESULTADOS):
 def registrar_respuesta(usuario, fecha, ruta=RESPUESTAS):
     """Registra un bloqueo SIMULADO; no modifica la cuenta."""
     with ruta.open("a", encoding="utf-8") as archivo:
-        archivo.write(f"{fecha.strftime(FORMATO)},USUARIO_BLOQUEADO_SIMULADO,{usuario}\n")
+        archivo.write(f"{fecha.strftime(FORMATO)},USUARIO_BLOQUEADO,{usuario}\n")
 
 def analizar(log_path=EVENTOS, resultados_path=RESULTADOS, respuestas_path=RESPUESTAS,
              confirmar=input, ahora=datetime.now, mostrar=print):

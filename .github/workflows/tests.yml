@@ -2,6 +2,8 @@ name: Python laboratory tests
 on:
   push:
   pull_request:
+permissions:
+  contents: read
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -10,7 +12,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      - name: Install dependencies
+      - name: Install Flask
         run: python -m pip install -r requirements.txt
       - name: Run unit tests
         run: python -m unittest discover -s tests -v
+      - name: Execute three ESIT MTTD and MTTR scenarios
+        run: python scripts/ejecutar_escenarios.py --salida evidencias
+      - name: Publish reproducible evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencia-esit-mttd-mttr
+          path: evidencias/
+          retention-days: 30
+          if-no-files-found: error

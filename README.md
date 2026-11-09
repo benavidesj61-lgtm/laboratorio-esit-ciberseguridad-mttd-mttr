@@ -60,3 +60,22 @@ Abre `http://127.0.0.1:5000/registro` para registrar un usuario ficticio y `http
 La acción `USUARIO_BLOQUEADO_SIMULADO` registrada en `respuesta.log` **no bloquea realmente** la cuenta; así lo pide la práctica. El detector se ejecuta manualmente: no es un SIEM de tiempo real. Flask corre en desarrollo local con `debug=True` y **no debe exponerse a Internet**. El archivo `.gitignore` impide publicar bases de datos locales, logs y entornos virtuales.
 
 Para entregar, pega únicamente el **enlace del repositorio público** en el Aula Virtual; no envíes ZIP.
+
+
+## Evidencia remota de los tres escenarios
+
+En cada push, GitHub Actions ejecuta el cliente de pruebas de Flask:
+crea dos usuarios **ficticios**, comprueba validaciones/hash/duplicados,
+genera tres escenarios con tres fallos cada uno, registra tres alertas y calcula
+MTTD/MTTR reales para esa **ejecución automatizada**.
+
+1. Abre [GitHub Actions](https://github.com/benavidesj61-lgtm/laboratorio-esit-ciberseguridad-mttd-mttr/actions).
+2. Abre la ejecución más reciente de **Python laboratory tests**.
+3. En **Artifacts**, descarga el artefacto \`evidencia-esit-mttd-mttr\`.
+4. Consulta \`reporte.md\` (tabla y promedios), \`eventos.log\`,
+   \`respuesta.log\`, \`resultados.csv\` y \`salida_terminal.txt\`.
+
+Esto es evidencia remota reproducible en Linux/CI, no afirma haber hecho
+pruebas físicas en la laptop ni haber enviado la entrega al Aula Virtual.
+La guía (pág. 2) exige el **README oficial del Aula Virtual** con
+datos académicos, que debe incorporarse antes de entregar.
